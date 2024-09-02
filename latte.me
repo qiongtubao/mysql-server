@@ -4,3 +4,17 @@ mkdir build
 cd build
 cmake  -DCMAKE_BUILD_TYPE=Release -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DWITH_READLINE=1 -DWITH_SSL=yes -DENABLED_LOCAL_INFILE=1 -DWITH_ZLIB=bundled -DWITH_OPENSSL=system -DWITH_PERL=1 -DWITH_PYTHON=1 -DWITH_DEBUG=0 -DCMAKE_INSTALL_PREFIX=$PATH -DDOWNLOAD_BOOST=1 -DWITH_BOOST=../third_party/boost ..
 make
+
+初始化
+./build/bin/mysqld --initialize --user=mysql --basedir=/home/dong/Documents/github/mysql-server/build/latte --datadir=/home/dong/Documents/github/mysql-server/debug/data  --log_error=/home/dong/Documents/github/mysql-server/debug/mysql_error.log
+启动
+./build/bin/mysqld --defaults-file=./debug/mysql_debug.cnf
+client 
+去mysql_error.log 文件中找密码登陆
+mysql -uroot -h127.0.0.1 -p
+
+修改密码
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'mysqlpw';
+
+创建database
+CREATE DATABASE test_database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

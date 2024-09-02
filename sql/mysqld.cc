@@ -8275,7 +8275,7 @@ int mysqld_main(int argc, char **argv)
   }
 
   mysqld_socket_acceptor->check_and_spawn_admin_connection_handler_thread();
-  mysqld_socket_acceptor->connection_event_loop();
+  mysqld_socket_acceptor->connection_event_loop();//监听端口
 #endif /* _WIN32 */
   server_operational_state = SERVER_SHUTTING_DOWN;
   sysd::notify("STOPPING=1\nSTATUS=Server shutdown in progress\n");

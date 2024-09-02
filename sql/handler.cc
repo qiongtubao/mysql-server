@@ -7264,21 +7264,21 @@ void get_sweep_read_cost(TABLE *table, ha_rows nrows, bool interrupted,
  ***************************************************************************/
 
 /** @brief
-  Read first row between two ranges.
-  Store ranges for future calls to read_range_next.
+  Read first row between two ranges.                    #读取两个范围之间的第一行。
+  Store ranges for future calls to read_range_next.     #存储范围以供将来调用 read_range_next。
 
-  @param start_key		Start key. Is 0 if no min range
-  @param end_key		End key.  Is 0 if no max range
-  @param eq_range_arg	        Set to 1 if start_key == end_key
-  @param sorted		Set to 1 if result should be sorted per key
+  @param start_key		Start key. Is 0 if no min range           #如果没有最小范围，则为 0
+  @param end_key		End key.  Is 0 if no max range              #如果没有最大范围，则为 0
+  @param eq_range_arg	        Set to 1 if start_key == end_key  #如果 start_key == end_key，则设置为 1
+  @param sorted		Set to 1 if result should be sorted per key   #如果结果应按键排序，则设置为 1
 
   @note
-    Record is read into table->record[0]
+    Record is read into table->record[0]              #记录被读入 table->record[0]
 
   @retval
-    0			Found row
+    0			Found row                                   #0 找到行
   @retval
-    HA_ERR_END_OF_FILE	No rows in range
+    HA_ERR_END_OF_FILE	No rows in range              #HA_ERR_END_OF_FILE 范围内无行
 */
 int handler::read_range_first(const key_range *start_key,
                               const key_range *end_key, bool eq_range_arg,

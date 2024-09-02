@@ -914,7 +914,7 @@ static bool accept_connection(MYSQL_SOCKET listen_sock,
     socket_len_t length = sizeof(struct sockaddr_storage);
     *connect_sock =
         mysql_socket_accept(key_socket_client_connection, listen_sock,
-                            (struct sockaddr *)(&c_addr), &length);
+                            (struct sockaddr *)(&c_addr), &length);//监听连接
     if (mysql_socket_getfd(*connect_sock) != INVALID_SOCKET ||
         (socket_errno != SOCKET_EINTR && socket_errno != SOCKET_EAGAIN))
       break;
@@ -1350,7 +1350,7 @@ Channel_info *Mysqld_socket_listener::listen_for_connection_event() {
 #else
   m_select_info.m_read_fds = m_select_info.m_client_fds;
   int retval = select((int)m_select_info.m_max_used_connection,
-                      &m_select_info.m_read_fds, 0, 0, 0);
+                      &m_select_info.m_read_fds, 0, 0, 0);//使用select函数监听 为什么不用epoll
 #endif
 
   if (retval < 0 && socket_errno != SOCKET_EINTR) {
